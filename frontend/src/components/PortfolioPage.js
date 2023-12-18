@@ -1,15 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import mockCompanies from '../data/mockData'; 
+import mockCompanies from '../data/mockData'; // Make sure the path is correct
+import { evaluate } from 'mathjs';
 
 const PortfolioPage = () => {
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [columns, setColumns] = useState(['marketCap']); // Default column
   const [searchCompany, setSearchCompany] = useState('');
   const [searchInfo, setSearchInfo] = useState('');
-  const [sortConfig, setSortConfig] = useState(null);
-  // DIY
-  const [diyVariable, setDiyVariable] = useState('');
   const [diyFormula, setDiyFormula] = useState('');
+  const [sortConfig, setSortConfig] = useState(null);
 
   const filteredCompanies = useMemo(() => {
     return searchCompany
@@ -29,77 +28,65 @@ const PortfolioPage = () => {
   const handleSelectCompany = (company) => {
     if (!selectedCompanies.some(selected => selected.comp_key === company.comp_key)) {
       setSelectedCompanies([...selectedCompanies, company]);
-      setSearchCompany(''); // Clear the search field
     }
   };
 
   const handleSelectInfo = (info) => {
     if (!columns.includes(info)) {
       setColumns([...columns, info]);
-      setSearchInfo(''); // Clear the search field
     }
   };
 
   const sortCompanies = (key) => {
     setSortConfig(currentConfig => {
-      // If the current sort key is the same as the clicked key, toggle the direction
-      if (currentConfig && currentConfig.key === key) {
-        return {
-          key: key,
-          direction: currentConfig.direction === 'ascending' ? 'descending' : 'ascending'
-        };
-      }
-      // Otherwise, set the new key and default to ascending order
+      // Toggle the direction or set new key and default to ascending
       return {
         key: key,
-        direction: 'ascending'
+        direction:
+          currentConfig && currentConfig.key === key && currentConfig.direction === 'ascending'
+            ? 'descending'
+            : 'ascending'
       };
     });
   };
 
-  const sortedCompanies = useMemo(() => {
-    let sortableCompanies = [...selectedCompanies];
-    if (sortConfig !== null) {
-      sortableCompanies.sort((a, b) => {
-        const aValue = sortConfig.key in a.comp_basic ? a.comp_basic[sortConfig.key] : a.comp_market[sortConfig.key];
-        const bValue = sortConfig.key in b.comp_basic ? b.comp_basic[sortConfig.key] : b.comp_market[sortConfig.key];
-
-        if (aValue < bValue) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (aValue > bValue) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableCompanies;
-  }, [selectedCompanies, sortConfig]);
-
-
-  const handleDiyFormulaChange = (event) => {
-    setDiyFormula(event.target.value);
-  };
-
   const applyDiyVariable = () => {
     try {
+      // Update selected companies with evaluated DIY variable
       setSelectedCompanies(currentCompanies =>
         currentCompanies.map(company => {
-          const formula = diyFormula
-            .replace(/marketCap/g, `(${company.comp_basic.marketCap})`)
-            .replace(/open/g, `(${company.comp_market.open})`);
-          const result = eval(formula);
+          // Prepare the scope with all available variables for the formula
+          const scope = {
+            marketCap: company.comp_basic.marketCap,
+            open: company.comp_market.open,
+            // Add more variables from company data if needed
+          };
+
+          // Evaluate the formula using the scope
+          const result = evaluate(diyFormula, scope);
           return { ...company, diyVariable: result };
         })
       );
+
+      // Add the DIY variable column if it's not already present
       if (!columns.includes('diyVariable')) {
         setColumns([...columns, 'diyVariable']);
       }
     } catch (error) {
-      console.error('Error in DIY formula:', error);
-      alert('There was an error with your formula. Please check it and try again.');
+      alert('Invalid formula. Please check your input.');
     }
   };
+
+  const sortedCompanies = useMemo(() => {
+    if (sortConfig !== null) {
+      return [...selectedCompanies].sort((a, b) => {
+        // Adjust the sorting logic to handle different data structures
+        // and potentially the new DIY variable
+        // ...sorting logic here
+      });
+    }
+    return selectedCompanies;
+  }, [selectedCompanies, sortConfig]);
 
   return (
     <div>
@@ -128,9 +115,9 @@ const PortfolioPage = () => {
       ))}
       <input
         type="text"
-        placeholder="Enter DIY formula..."
+        placeholder="0.5*marketCap+0.5*open"
         value={diyFormula}
-        onChange={handleDiyFormulaChange}
+        onChange={(e) => setDiyFormula(e.target.value)}
       />
       <button onClick={applyDiyVariable}>Apply DIY Variable</button>
       <table>
@@ -155,6 +142,8 @@ const PortfolioPage = () => {
                 <td key={`${company.comp_key}-${column}`}>
                   {column in company.comp_basic
                     ? company.comp_basic[column]
+                    : column === 'diyVariable'
+                    ? company.diyVariable
                     : company.comp_market[column]}
                 </td>
               ))}
@@ -164,7 +153,6 @@ const PortfolioPage = () => {
       </table>
     </div>
   );
-  
 };
 
 export default PortfolioPage;
