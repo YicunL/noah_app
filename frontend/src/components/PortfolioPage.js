@@ -7,20 +7,23 @@ const PortfolioPage = () => {
   const [searchCompany, setSearchCompany] = useState('');
   const [searchInfo, setSearchInfo] = useState('');
 
+  // Filters companies based on search input
   const filteredCompanies = searchCompany
     ? mockCompanies.filter(company =>
         company.comp_basic.shortName.toLowerCase().includes(searchCompany.toLowerCase())
       )
     : [];
 
+  // Information fields that could be added as columns
   const infoFields = ['dayLow', 'dayHigh', 'open', 'close']; // Extend with more fields as needed
 
+  // Filters information fields based on search input
   const filteredInfoFields = searchInfo
     ? infoFields.filter(field => field.toLowerCase().includes(searchInfo.toLowerCase()))
     : [];
 
   const handleSelectCompany = (company) => {
-    if (!selectedCompanies.includes(company)) {
+    if (!selectedCompanies.some(selected => selected.comp_key === company.comp_key)) {
       setSelectedCompanies([...selectedCompanies, company]);
       setSearchCompany(''); // Clear the search field
     }
@@ -70,7 +73,10 @@ const PortfolioPage = () => {
             <tr key={company.comp_key}>
               <td>{company.comp_basic.shortName}</td>
               {columns.map(column => (
-                <td key={`${company.comp_key}-${column}`}>{company.comp_market[column]}</td>
+                <td key={`${company.comp_key}-${column}`}>
+                  {/* Check if the column is from comp_basic or comp_market */}
+                  {column in company.comp_basic ? company.comp_basic[column] : company.comp_market[column]}
+                </td>
               ))}
             </tr>
           ))}
