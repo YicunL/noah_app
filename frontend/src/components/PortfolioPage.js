@@ -1,45 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import mockCompanies from '../data/mockData'; 
 
 const PortfolioPage = () => {
-  const [data, setData] = useState([]);
-  const [filter, setFilter] = useState('');
+  const [selectedCompanies, setSelectedCompanies] = useState([]);
+  const [columns, setColumns] = useState(['marketCap']); // Default column
+  const [searchCompany, setSearchCompany] = useState('');
+  const [searchInfo, setSearchInfo] = useState('');
 
-  useEffect(() => {
-    axios.get('/api/companies/') 
-      .then(response => setData(response.data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+  const filteredCompanies = searchCompany
+    ? mockCompanies.filter(company =>
+        company.comp_basic.shortName.toLowerCase().includes(searchCompany.toLowerCase())
+      )
+    : [];
 
-  const filteredData = data.filter(item => 
-    item.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const infoFields = ['dayLow', 'dayHigh', 'open', 'close']; // Extend with more fields as needed
+
+  const filteredInfoFields = searchInfo
+    ? infoFields.filter(field => field.toLowerCase().includes(searchInfo.toLowerCase()))
+    : [];
+
+  const handleSelectCompany = (company) => {
+    if (!selectedCompanies.includes(company)) {
+      setSelectedCompanies([...selectedCompanies, company]);
+      setSearchCompany(''); // Clear the search field
+    }
+  };
+
+  const handleSelectInfo = (info) => {
+    if (!columns.includes(info)) {
+      setColumns([...columns, info]);
+      setSearchInfo(''); // Clear the search field
+    }
+  };
 
   return (
     <div>
-      <h1>Portfolio Page</h1>
-      <input 
-        type="text" 
-        value={filter} 
-        onChange={e => setFilter(e.target.value)} 
-        placeholder="Filter by name..."
+      <h1>Portfolio</h1>
+      <input
+        type="text"
+        placeholder="Search company..."
+        value={searchCompany}
+        onChange={(e) => setSearchCompany(e.target.value)}
       />
+      {filteredCompanies.map(company => (
+        <div key={company.comp_key} onClick={() => handleSelectCompany(company)}>
+          {company.comp_basic.shortName}
+        </div>
+      ))}
+      <input
+        type="text"
+        placeholder="Search info..."
+        value={searchInfo}
+        onChange={(e) => setSearchInfo(e.target.value)}
+      />
+      {filteredInfoFields.map(info => (
+        <div key={info} onClick={() => handleSelectInfo(info)}>
+          {info}
+        </div>
+      ))}
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Salary</th>
+            <th>Company</th>
+            {columns.map(column => <th key={column}>{column}</th>)}
           </tr>
         </thead>
         <tbody>
-          {filteredData.map(item => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.age}</td>
-              <td>{item.address}</td>
-              <td>{item.salary}</td>
+          {selectedCompanies.map(company => (
+            <tr key={company.comp_key}>
+              <td>{company.comp_basic.shortName}</td>
+              {columns.map(column => (
+                <td key={`${company.comp_key}-${column}`}>{company.comp_market[column]}</td>
+              ))}
             </tr>
           ))}
         </tbody>
