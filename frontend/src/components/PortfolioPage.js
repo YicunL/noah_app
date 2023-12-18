@@ -126,6 +126,13 @@ const PortfolioPage = () => {
           {info}
         </div>
       ))}
+      <input
+        type="text"
+        placeholder="Enter DIY formula..."
+        value={diyFormula}
+        onChange={handleDiyFormulaChange}
+      />
+      <button onClick={applyDiyVariable}>Apply DIY Variable</button>
       <table>
         <thead>
           <tr>
@@ -157,6 +164,7 @@ const PortfolioPage = () => {
       </table>
     </div>
   );
+  
 };
 
 export default PortfolioPage;
