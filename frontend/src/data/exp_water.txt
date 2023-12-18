@@ -1,0 +1,136 @@
+Policy: Water
+
+W_Strategy
+    (a)    
+    Companies should recognise their dependency and impact on water
+    resources, integrate commitments to sustainable water management
+    into their policies, and, where relevant, have a clear water management
+    strategy.
+
+    (b)
+    Companies should take a long-term approach and understand the
+    potential business, social and environmental implications of evolving
+    corporate water needs, including in supply chains and products’ life
+    cycles.
+
+    (c)
+    Companies should incorporate relevant water challenges, opportunities
+    and sustainability considerations into investment planning and consider
+    the sensitivity of their long-term business strategy to water stress and
+    regulation, for example through scenario analysis. Analyses should reflect
+    that water stress is region- and often asset-specific, and include local
+    hydrological, environmental, social, economic and regulatory factors
+    where appropriate.
+
+    (c)
+    Companies should, where relevant, consider research and development
+    to reduce company water dependency, use or discharge, improve water
+    quality, or deliver new processes, products and services.
+
+    (d)    
+    Companies should regularly consider whether their organisational
+    structure, incentive systems, training programmes and wider company
+    culture integrate sustainable business practices appropriately.
+    Employees and contractors should be engaged in these efforts and made
+    aware of company policies and practices.
+
+    (e)
+    Companies could consider putting in place a mechanism for third-party
+    expert input into their water management strategy.
+
+W_Risk
+
+    (a)
+    Companies should identify and incorporate water risk in a robust
+    and integrated framework. Risk management efforts should include
+    appropriate systems for prioritising, mitigating, monitoring and
+    reporting on physical, regulatory and reputational risks.
+
+    (b)    
+    Companies should quantify the financial impacts of water risk. Applying
+    a shadow price – reflecting underlying cost dimensions – for water may
+    aid in the integration of certain water risks with financial risk metrics or
+    into scenario analysis.
+
+    (c)
+    Companies should monitor water withdrawals, consumption and
+    quality, and identify and consider relevant adaptation and mitigation
+    measures to avoid or reduce risks. This could include improved water
+    efficiency in production processes, improved environmental quality
+    of discharge, increased water recycling practices, or reduction
+    of products’ life cycle water dependency.
+
+    (d)
+    Companies should adopt, where relevant, industry standards and best
+    practices in sustainable water management.
+
+    (e)
+    Companies should identify and monitor water risks in their supply
+    chains, including in agriculture, implement relevant procurement
+    policies for products and services, engage with relevant strategic
+    suppliers, and share best practices in sustainable water management.
+
+W_Disclose
+
+    (a)
+    Companies should disclose their water management strategy, risks,
+    responses and opportunities.
+
+    (b)    
+    Companies should report in accordance with relevant sustainability
+    disclosure standards.
+
+    (c)
+    Company reporting should reflect that water risks are region- and often
+    asset-specific, and include co-ordinates of key installations and basinlevel
+    hydrological, environmental, social, economic and regulatory
+    information where appropriate. They should report proportions of total
+    water withdrawals and consumption in regions with high water stress.
+
+    (d)
+    Companies should, where relevant, develop a framework to monitor
+    and set relevant benchmarks, key performance indicators and targets,
+    for direct and indirect company water withdrawals, consumption,
+    recycling, discharge and environmental quality. They should report on
+    indicators and progress against targets at a sufficient level of detail,
+    including at the asset level where relevant.
+
+    (e)
+    Companies should report sufficiently granular data to internationally
+    recognised reporting initiatives. Companies should be transparent
+    on data reported to regulators and strive to report such data across
+    operations.
+
+    (f)
+    Companies should strive to report relevant data for supply chains and
+    products and services.
+
+W_engage
+
+    (a)
+    Companies should, where relevant, have policies or guidelines for
+    engaging with policy makers, regulators and relevant stakeholders on
+    water management and be transparent about associated spending,
+    activities and trade association memberships. They should assess
+    whether the advocacy positions of trade associations align with their
+    own positions.
+
+    (b)
+    If they engage with regulators, companies should publicly outline their
+    position on specific water regulation relevant to their business and
+    outlook. Companies should consider promotion of policies supporting
+    the efficient use of water.
+
+    (c)
+    Companies should understand their social and environmental impact
+    on, and the associated needs of, the communities surrounding
+    their direct operations and supply chains, as well as on the users of
+    their products and services. They should seek to contribute to local
+    populations retaining necessary access to water.
+
+    (d)
+    Companies should consider engaging in collective river basin
+    management efforts and, where appropriate, collaborate with
+    communities, NGOs and other relevant organisations on procuring
+    necessary data and building on-the-ground water sustainability
+    programmes.

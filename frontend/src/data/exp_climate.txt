@@ -1,0 +1,325 @@
+Policy: Climate
+
+C_Core
+
+    (a)
+    Board oversight: Company boards should ensure climate risks
+    and opportunities are integrated into corporate strategy and risk
+    management. They should be transparent on how they establish
+    oversight by disclosing details of the associated governance structures,
+    mechanisms and activities involving the board.
+
+    (b)
+    Climate risk disclosures: Companies should analyse and disclose the
+    way in which climate risk may impact their operations, value chains and
+    demand for their products.
+
+    (c)
+    Greenhouse gas reporting: Companies should report scope 1,
+    scope 2 and scope 3 greenhouse gas emissions in accordance with
+    the Greenhouse Gas Protocol. Companies should seek reasonable
+    assurance of at least their scope 1 and scope 2 emissions.
+
+    (d)
+    Net zero 2050: Companies should commit to net zero by 2050 or sooner
+    and align their activities with the objectives of the Paris Agreement.
+
+    (e)    
+    Interim targets: Companies should set science-based interim emission
+    reduction targets that cover scope 1, scope 2 and material scope 3
+    emissions, consistent with net zero by 2050. Interim targets should
+    be based on region- and industry-appropriate pathways, using the
+    associated absolute or intensity measure for emissions.
+
+    (f)    
+    Transition plans: Companies should implement time-bound and
+    quantified transition plans, designed to deliver on their interim emission
+    reduction targets, and annually disclose progress against preestablished
+    and consistent KPIs.
+
+
+C_strategy
+
+    (a)    
+    The Paris Agreement: Companies should acknowledge the scientific
+    consensus on climate change and endorse the objectives of the Paris
+    Agreement.
+
+    (b)
+    Board oversight: Company boards should ensure climate risks and
+    opportunities are integrated into corporate strategy and establish
+    oversight of how this is delivered. Details of the associated governance
+    structures, mechanisms and activities involving the board should be
+    disclosed.
+
+    (c)
+    International Sustainability Standards Board (ISSB) reporting:
+    Companies should analyse and disclose the way in which climate risk
+    may impact their operations, value chains and demand for their products.
+    At a minimum, disclosures should be aligned with IFRS S28 or equivalent
+    standards. This approach builds on the recommendations of the Task
+    Force on Climate-related Financial Disclosures (TCFD).
+
+    (d)
+    Greenhouse gas reporting: Companies should report scope 1, scope
+    2 and scope 3 greenhouse gas emissions in accordance with the
+    Greenhouse Gas Protocol.10 Companies can increase transparency with
+    disclosure via CDP or the Net-Zero Data Public Utility (NZDPU) in addition
+    to corporate disclosures.11,12 Where relevant, companies should also
+    report the physical emission intensity of their products.
+
+    (e)
+    Scope 2 methodologies: When reporting scope 2 emissions, companies
+    should use the location method as a primary metric.13 Where companies
+    also report their scope 2 emissions using the market method, they
+    should reconcile the differences, including quantifying the use of energy
+    attribute certificates such as unbundled renewable energy certificates
+    (RECs).
+
+    (f)
+    Assurance: At a minimum, reported scope 1 and scope 2 emissions
+    should be subject to reasonable assurance by a third party, and major
+    underlying assumptions, including activity data and emissions factors,
+    should be disclosed. Companies should seek limited assurance of their
+    broader climate disclosures.
+
+    (g)
+    Scenario analysis: To analyse their resilience to a range of future
+    outcomes, including those for 1.5°C and high physical damages,
+    companies should use climate scenarios, and disclose the results. For
+    companies in emission intensive sectors, scenario analysis should show
+    how changes in climate policy, including carbon pricing, could impact
+    their operations, value chains and demand for their products.
+
+    (h)
+    Adaptation and resilience: Companies should analyse and disclose how
+    increasing physical climate risk could drive the need for investments in
+    adaptation and resilience in their operations and value chains, including
+    the long-term viability of assets. Companies with concentrated physical
+    assets should disclose location data. Companies should explain
+    whether their main adaptation needs are likely to be met by government
+    investment.
+
+    (i) Industry-specific expectations
+    Financed emissions: Financial services companies should report
+    their financed emissions using the Partnership for Carbon Accounting
+    Financials (PCAF) methodology.14
+
+    Real estate emissions: Real estate companies should report operational
+    carbon emissions from both landlord and tenant-controlled spaces, and
+    embodied carbon emissions from developments.
+
+    Avoided emissions and lifecycle analysis: To demonstrate the
+    emissions benefits of their products or services, companies are
+    encouraged to use lifecycle emissions and avoided emissions analysis.
+    Such disclosures should be made in addition to Greenhouse Gas
+    Protocol reporting. The major assumptions underpinning the calculations
+    should be disclosed.
+
+C_target
+
+    (a)
+    Net zero 2050: Companies should commit to net zero by 2050 or sooner
+    and align their activities with the objectives of the Paris Agreement.
+    Interim targets: Consistent with net zero by 2050, companies should set
+    science-based interim emission reduction targets that cover scope 1,
+    scope 2, and material scope 3 emissions.
+
+    (b)
+    Scope 2 targets: Over time, companies should prioritise securing
+    renewable power purchase agreements, or developing on-site
+    renewable generation, ahead of using energy attribute certificates such
+    as unbundled RECs.15
+
+    (c)
+    Scope 3 targets: When setting scope 3 targets, companies should
+    explain how they define the materiality of different scope 3 emissions
+    categories. This should include considerations of how and where
+    they can exert influence on their value chains and potential financial
+    risks. Companies with combustion emissions in the use-phase of their
+    products should specifically address scope 3 emissions in Use of Sold
+    Products and Processing of Sold Products.
+
+    (d)    
+    Net zero pathways: Emission reduction targets should be aligned with
+    region- and industry-appropriate science-based pathways, using the
+    associated absolute or intensity measure for emissions. Companies
+    should disclose how they consider their target pathways to be Parisaligned.Where industry appropriate guidance exists, companies are
+    encouraged to submit their targets for validation by the Science Based
+    Targets initiative (SBTi).
+
+    (e)
+    Industry-specific expectations
+    Product mix targets: Where demand for a company’s products or
+    services is likely to be impacted by climate change, companies should
+    incorporate product mix change into their target setting. An example
+    would be an auto company setting a product mix target for zero emission
+    vehicles.
+
+    Fossil fuel demand: For fossil fuel products, companies should plan
+    for production that is consistent with climate science and expected
+    demand-side changes. They should disclose reserve lives and remaining
+    years of production based on current investment plans.
+
+    Methane emissions: Where methane emissions represent a material
+    portion of a company’s overall greenhouse gas emissions, such as in
+    agricultural or fossil fuel production, companies should set standalone
+    targets for methane in line with the Global Methane Pledge.17
+
+    Financed emissions: Companies in financial services should set
+    standalone targets for the financed emissions associated with their
+    lending, investing, capital markets and insurance activities. If financing
+    coal activities, they should adopt policies for how this will be phased out, including criteria for providing new loan commitments or other financial
+    intermediary support.
+
+    Real estate targets: Companies in real estate should set net zero
+    emission reduction targets in line with the SBTi and Carbon Risk Real
+    Estate Monitor (CRREM) energy-reduction pathways.
+
+    AFOLU: Companies with Agriculture, Forestry and Other Land Use
+    (AFOLU) activities within their operations and value chains should seek to
+    eliminate deforestation by 2025 and conversion of natural ecosystems in
+    the short term, consistent with our expectation document on biodiversity
+    and ecosystems. Companies should incorporate emerging international
+    best practice for measurement and target setting, particularly
+    frameworks such as the Taskforce on Nature-related Financial
+    Disclosures (TNFD) and Science Based Targets Network (SBTN).
+
+C_transition
+
+    (a)
+    Decarbonisation strategy: Companies should implement and disclose
+    time-bound and quantified decarbonisation strategies. Details should
+    include specific abatement measures needed to reach their interim
+    emission reduction targets, including internal abatement measures,
+    divestments, output changes, carbon credits and contractual
+    instruments such as RECs. Avoided emissions should not be included in a
+    decarbonisation strategy. A sample disclosure is included in Appendix A.
+
+    (b)
+    Carbon credits: Companies can use carbon credits as a supplement to
+    signal high climate ambitions but should follow the mitigation hierarchy
+    and prioritise reducing GHG emissions from their own operations and
+    value chains. The carbon credits should be additional and verified, with
+    an increasing focus on durable removal credits over time. Companies
+    should not count carbon credits towards science-based interim emission
+    reduction targets and should disclose details of their use. We provide
+    further details in our view on corporate use of voluntary carbon credits.
+
+    (c)
+    Carbon lock-in: To minimise the risk of carbon lock-in, companies should
+    ensure that their interim targets and transition plans are consistent with
+    the delivery of net zero 2050.
+
+    (d)
+    Abatement costs: When planning their decarbonisation strategy,
+    emission-intensive companies should construct and analyse their
+    abatement cost curve or a simplified equivalent to help quantify longterm
+    decarbonisation costs beyond the interim target horizon.20
+
+    (e)
+    Procurement: For internal abatement measures, companies should
+    provide an overview of the products and service they plan to procure. If
+    they rely on immature climate technologies to reach their interim targets,
+    the use of advance market commitments, such as those under the First
+    Movers Coalition, is encouraged.
+
+    (f)
+    Adaptation and resilience: Companies with concentrated physical
+    assets or heightened physical climate risk in their value chains should
+    include adaptation and resilience as part of their transition plan.
+
+    (g)
+    Financial planning: Companies should allocate adequate financial
+    resources to their transition plan and disclose the associated capital
+    expenditure and R&D expenditure. Decarbonisation capital expenditure
+    guidance should include the total and annual amounts to the interim
+    target year and the amounts allocated to each specific abatement
+    measure.
+
+    (h)
+    Financial analysis: Companies should analyse and disclose expected
+    changes to their financial model from their decarbonisation strategy
+    including operating costs and capital structure.
+
+    (i)
+    Internal carbon pricing: To ensure their investment decisions are
+    consistent with their emission reduction plans, companies should
+    implement internal carbon pricing mechanisms.
+
+    (j)
+    Acquisitions and divestments: Companies should consider the climate
+    implications of major acquisitions or divestments, in a way that 
+    prioritises the preservation of climate ambition.
+
+    (k)
+    Decarbonisation feasibility: For major emissions sources not included
+    in a company’s decarbonisation strategy, companies should explain
+    why they have chosen not to pursue them and the feasibility challenges
+    acting as barriers to decarbonisation, including financial, technological,
+    or policy hurdles.
+
+    (l)
+    Climate lobbying: Companies should align their lobbying activities
+    with the objectives of the Paris Agreement and address membership of
+    trade bodies or associations that is or may appear incongruent with the
+    company’s climate change policy. Companies should be transparent
+    about where they advocate for specific policy and legislative support.
+
+    (m)
+    Impacts and dependencies: Transition plans should consider impacts
+    and dependencies with adjacent sustainability topics, such as the natural
+    environment, workforces and impacted communities.21 Companies can
+    refer to Norges Bank Investment Management’s expectations on human
+    capital, human rights, and biodiversity and ecosystems for further details.
+    Stakeholder engagement: Companies should consider their current and
+    planned engagement with peers, suppliers, customers and regulators,
+    and how this supports their business and execution of their climate
+    plan. Companies should also consider and mitigate the impacts of their
+    transition plan on workers and affected communities.
+
+C_transparency    
+    
+    (a)
+    Board accountability: Company boards should oversee the delivery of
+    transition plans, considering the adequate use of financial and human
+    resources. They should ensure that the internal delivery of the transition
+    plan is compatible with the company’s public statements, targets and
+    applicable regulatory regimes, to protect the company from litigation risk.
+    Decarbonisation KPIs: Companies should establish the KPIs that they
+    plan to use on a consistent annual basis to measure progress in delivery
+    of their transition plan. At a minimum this should include the annual and
+    cumulative progress made towards emission reduction targets relative to
+    the chosen baseline year.
+
+    (b)
+    Annual progress reporting: Companies should disclose progress
+    annually on the delivery of their net zero strategy. This should cover preestablished decarbonisation KPIs, project and investment milestones in
+    their transition plan, and planned developments for the coming year.
+
+    (c)
+    Strategy update cycle: To incorporate how their strategy might need to
+    adjust for technology and policy changes, companies should undertake a
+    net zero strategy review and update at least every three years.
+
+    (d)
+    M&A attribution: Companies should disclose the contribution that
+    mergers and acquisitions have made to their reported emissions on
+    a year-on-year basis. In the event of major mergers and acquisitions,
+    reported emissions could be restated to adjust target baselines for
+    emission reductions.
+
+    (e)
+    Remuneration: Companies should demonstrate how their remuneration
+    and broader performance frameworks align with delivery of interim
+    targets and transition plans. Where climate metrics are used in incentive
+    schemes, they should be measurable, stretching and transparent, with a
+    clear link to strategy.
+
+    (f)
+    Say On Climate: Where boards seek approval of their climate strategy
+    through a Say On Climate vote, they should include detailed information
+    on targets set and supporting plans that demonstrate the likelihood of
+    delivery. Such votes do not supersede the board’s responsibility for
+    ongoing oversight of climate change strategy. Annual votes are not
+    necessary, unless a material change to the strategy is envisaged.

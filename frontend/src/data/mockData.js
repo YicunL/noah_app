@@ -80,7 +80,7 @@ const companies = [
         firstTradeDateEpochUtc: '1980-12-12T00:00:00.000Z',
       },
     },
-    // ...other 4 companies with similarly structured data
+    
     {
       comp_key: 2,
       comp_basic: {

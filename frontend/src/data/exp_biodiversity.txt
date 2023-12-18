@@ -1,0 +1,78 @@
+Policy: Biodivesity
+
+    BD_Strategy
+        (a) 
+        
+        Companies should assess their direct and indirect dependencies
+        and impacts on biodiversity and ecosystems and incorporate such
+        assessments into their policies.
+
+        (b)
+        Companies should understand the state of ecosystems they depend
+        on for natural resources and services and assess the potential business
+        implications of overexploitation or degradation. Companies should
+        have a strategy to address these implications, including the business
+        opportunities arising from more sustainable uses of natural resources.
+
+        (c)
+        Companies should have a policy concerning the management of critical
+        habitats4 when involved in activities that may significantly impact
+        ecosystems, with the ambition of no net loss of biodiversity.
+
+        (d)
+        Companies involved in agricultural value chains should have a policy
+        for sustainable farming, and a plan for implementation, considering
+        elements such as integrated pest management, erosion control or
+        other relevant agroecological practices.
+ 
+        (e)
+        Companies should assess their direct and indirect impacts on
+        biodiversity and ecosystems and have a strategy for managing these
+        based on the mitigation hierarchy. They should take action to eliminate
+        deforestation and peatland loss from their business activities and value
+        chains by 2025 at the latest, and the conversion of other remaining
+        natural ecosystems by 20305, including by adopting “no deforestation,
+        no exploitation, no peat” policies where relevant.
+
+
+        BD_Risk
+        (a)
+        Companies should identify any material physical and transition risks
+        related to biodiversity and ecosystems and incorporate these into
+        their risk framework, taking into account the targets of the Kunming-
+        Montreal Global Biodiversity Framework.
+        
+        (b)
+        Companies should manage their dependency on natural resources and
+        seek to ensure that the ecosystems upon which they rely can sustain
+        their business operations. They should engage with their value chain
+        and seek circular economy solutions.
+
+        (c)
+        Companies should include biodiversity and ecosystems in their
+        environmental impact assessments and apply the mitigation
+        hierarchy as a framework to limit their impacts. They should adopt a
+        precautionary approach where there is a risk of significant biodiversity
+        and ecosystem impacts, including from pesticides, invasive species or
+        products of genetic modification.
+        
+        (d)
+        Companies should disclose their processes to identify, assess and
+        manage material risks related to deforestation and other land use
+        changes in their own operations or supply chains. They should adopt
+        industry standards and best practices for avoiding deforestation
+        and land degradation, including protection of high carbon-stock
+        landscapes and high conservation value areas.
+        
+        (e)
+        Companies involved in agricultural value chains should work with
+        contract farmers and other suppliers to implement sustainable farming
+        techniques and adhere to recognised independent certification
+        systems that focus on improving sustainability performance for
+        agricultural products.
+        
+        (f)
+        Companies should monitor whether suppliers that deliver forest-linked
+        products6 implement best practices for environmental management
+        and adhere to international standards and certification systems for
+        sustainable agricultural production and land management.        

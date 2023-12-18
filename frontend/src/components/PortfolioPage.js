@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import mockCompanies from '../data/mockData'; // Make sure the path is correct
+import mockCompanies from '../data/mockData'; 
 import { evaluate } from 'mathjs';
 
 const PortfolioPage = () => {
