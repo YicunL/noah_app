@@ -17,7 +17,7 @@ function App() {
         {/* Route configuration */}
         <Routes>
           <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/expectations" element={<ExpectationPage />} />
+          <Route path="expectations/*" element={<ExpectationPage />} />
         </Routes>
       </div>
     </BrowserRouter>
