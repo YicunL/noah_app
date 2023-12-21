@@ -1,154 +1,155 @@
 import React, { useState, useMemo } from 'react';
-import mockCompanies from '../data/mockData'; 
+import { useTable } from 'react-table';
 import { evaluate } from 'mathjs';
+import { mockCompanies } from '../data/mockData'; // Adjust this import to your file structure
 
 const PortfolioPage = () => {
-  const [selectedCompanies, setSelectedCompanies] = useState([]);
-  const [columns, setColumns] = useState(['marketCap']); // Default column
-  const [searchCompany, setSearchCompany] = useState('');
-  const [searchInfo, setSearchInfo] = useState('');
-  const [diyFormula, setDiyFormula] = useState('');
-  const [sortConfig, setSortConfig] = useState(null);
+  // useState hooks
+  const [data, setData] = useState(mockCompanies); // State for your data
+  const [customFormula, setCustomFormula] = useState(''); // State for the custom formula
+  const [customFormulaError, setCustomFormulaError] = useState(''); // State for custom formula error message
+  const [customResults, setCustomResults] = useState({});
 
-  const filteredCompanies = useMemo(() => {
-    return searchCompany
-      ? mockCompanies.filter(company =>
-          company.comp_basic.shortName.toLowerCase().includes(searchCompany.toLowerCase())
-        )
-      : [];
-  }, [searchCompany]);
-
-  const infoFields = ['marketCap', 'dayLow', 'dayHigh', 'open', 'close']; // Extend with more fields as needed
-  const filteredInfoFields = useMemo(() => {
-    return searchInfo
-      ? infoFields.filter(field => field.toLowerCase().includes(searchInfo.toLowerCase()))
-      : [];
-  }, [searchInfo, infoFields]);
-
-  const handleSelectCompany = (company) => {
-    if (!selectedCompanies.some(selected => selected.comp_key === company.comp_key)) {
-      setSelectedCompanies([...selectedCompanies, company]);
-    }
-  };
-
-  const handleSelectInfo = (info) => {
-    if (!columns.includes(info)) {
-      setColumns([...columns, info]);
-    }
-  };
-
-  const sortCompanies = (key) => {
-    setSortConfig(currentConfig => {
-      // Toggle the direction or set new key and default to ascending
-      return {
-        key: key,
-        direction:
-          currentConfig && currentConfig.key === key && currentConfig.direction === 'ascending'
-            ? 'descending'
-            : 'ascending'
-      };
-    });
-  };
-
-  const applyDiyVariable = () => {
+  const applyCustomFormula = () => {
     try {
-      // Update selected companies with evaluated DIY variable
-      setSelectedCompanies(currentCompanies =>
-        currentCompanies.map(company => {
-          // Prepare the scope with all available variables for the formula
-          const scope = {
-            marketCap: company.comp_basic.marketCap,
-            open: company.comp_market.open,
-            // Add more variables from company data if needed
-          };
-
-          // Evaluate the formula using the scope
-          const result = evaluate(diyFormula, scope);
-          return { ...company, diyVariable: result };
-        })
-      );
-
-      // Add the DIY variable column if it's not already present
-      if (!columns.includes('diyVariable')) {
-        setColumns([...columns, 'diyVariable']);
-      }
-    } catch (error) {
-      alert('Invalid formula. Please check your input.');
-    }
-  };
-
-  const sortedCompanies = useMemo(() => {
-    if (sortConfig !== null) {
-      return [...selectedCompanies].sort((a, b) => {
-        // Adjust the sorting logic to handle different data structures
-        // and potentially the new DIY variable
-        // ...sorting logic here
+      const newCustomResults = {};
+      mockCompanies.forEach(company => {
+        const scope = { ...company.quantitative};
+        newCustomResults[company.comp_key] = evaluate(customFormula, scope);
       });
-    }
-    return selectedCompanies;
-  }, [selectedCompanies, sortConfig]);
 
+      setCustomResults(newCustomResults);
+      setCustomFormulaError('');
+    } catch (error) {
+      console.error('Error evaluating custom formula', error);
+      setCustomFormulaError('Error evaluating formula. Please check your syntax.')
+    }
+  }
+
+  // useMemo hook for defining columns
+  const columns = useMemo(() => [
+    {
+      Header: ' ',
+      columns: [
+        { 
+          Header: ' ',
+          columns: [
+            {
+              Header: 'No',
+              accessor: 'comp_key',
+            },
+    
+            {
+              Header: 'ISIN',
+              accessor: 'ISIN',
+            },
+    
+            {
+              Header: 'shortName',
+              accessor: 'name',
+            },
+    
+            {
+              Header: 'Country',
+              accessor: 'country',
+            },
+    
+            {
+              Header: 'Sector',
+              accessor: 'sector',
+            },
+            // ... other top-level headers
+          ], 
+        },
+    
+        {
+          Header: ' ',
+          columns: [ {
+            Header: 'Factor Weights',
+            columns: [
+              {
+                Header: 'Return Delta',
+              }
+            ]
+          }
+          ]
+        },
+    
+        {
+          Header: 'Quantitative',
+          columns: Object.keys(mockCompanies[0].quantitative).map(key => ({
+            Header: key,
+            accessor: d => d.quantitative[key], // Accessor is a function when dealing with nested data
+          })),
+        },
+        {
+          Header: 'Qualitative',
+          columns: Object.keys(mockCompanies[0].qualitative).map(key => ({
+            Header: key,
+            accessor: d => d.qualitative[key], // Same as above for nested data
+          })),
+        },
+        {
+          Header: 'Custom',
+          columns: [
+            {
+              Header: 'Score 1',
+              id: 'customFormulaResult',
+              accessor: company => customResults[company.comp_key] || '',
+            },
+          ],
+        },
+      ]
+    }
+    // ... other grouped headers
+  ], []);
+
+  // useTable hook
+  const tableInstance = useTable({ columns, data });
+
+  // Destructure the necessary properties and methods from tableInstance
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = tableInstance;
+
+
+  // JSX for rendering your table and other UI elements
   return (
     <div>
-      <h1>Portfolio</h1>
       <input
         type="text"
-        placeholder="Search company..."
-        value={searchCompany}
-        onChange={(e) => setSearchCompany(e.target.value)}
+        placeholder="Enter custom formula..."
+        value={customFormula}
+        onChange={e => setCustomFormula(e.target.value)}
       />
-      {searchCompany && filteredCompanies.map(company => (
-        <div key={company.comp_key} onClick={() => handleSelectCompany(company)}>
-          {company.comp_basic.shortName}
-        </div>
-      ))}
-      <input
-        type="text"
-        placeholder="Search info..."
-        value={searchInfo}
-        onChange={(e) => setSearchInfo(e.target.value)}
-      />
-      {searchInfo && filteredInfoFields.map(info => (
-        <div key={info} onClick={() => handleSelectInfo(info)}>
-          {info}
-        </div>
-      ))}
-      <input
-        type="text"
-        placeholder="0.5*marketCap+0.5*open"
-        value={diyFormula}
-        onChange={(e) => setDiyFormula(e.target.value)}
-      />
-      <button onClick={applyDiyVariable}>Apply DIY Variable</button>
-      <table>
+      <button onClick={applyCustomFormula}>Apply Custom Formula</button>
+      {customFormulaError && <div>{customFormulaError}</div>}
+
+      <table {...getTableProps()}>
         <thead>
-          <tr>
-            <th>Company</th>
-            {columns.map(column => (
-              <th key={column} onClick={() => sortCompanies(column)}>
-                {column}
-                {sortConfig && sortConfig.key === column ? (
-                  sortConfig.direction === 'ascending' ? ' 🔼' : ' 🔽'
-                ) : null}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sortedCompanies.map(company => (
-            <tr key={company.comp_key}>
-              <td>{company.comp_basic.shortName}</td>
-              {columns.map(column => (
-                <td key={`${company.comp_key}-${column}`}>
-                  {column in company.comp_basic
-                    ? company.comp_basic[column]
-                    : column === 'diyVariable'
-                    ? company.diyVariable
-                    : company.comp_market[column]}
-                </td>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map(row => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => (
+                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
