@@ -172,7 +172,7 @@ const BiodiversityPage = () => {
 const ClimatePage = () => {
   return (
     <div>
-      <h1>Policy: Biodiversity</h1>
+      <h1>Policy: Climate</h1>
       <table>
         <thead>
           <tr>
@@ -202,7 +202,7 @@ const ClimatePage = () => {
 const WaterPage = () => {
   return (
     <div>
-      <h1>Policy: Biodiversity</h1>
+      <h1>Policy: Water</h1>
       <table>
         <thead>
           <tr>
@@ -232,7 +232,6 @@ const WaterPage = () => {
 const ExpectationPage = () => {
   return (
     <div>
-      <h1>Expectations</h1>
       <nav>
         <ul>
           <li><Link to="biodiversity">Biodiversity</Link></li>
