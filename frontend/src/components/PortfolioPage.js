@@ -1,32 +1,51 @@
 import React, { useState, useMemo } from 'react';
-import { useTable , useSortBy } from 'react-table';
+import { useTable, useSortBy } from 'react-table';
 import { evaluate } from 'mathjs';
-import { mockCompanies } from '../data/mockData'; // Make sure this import path is correct
+import { mockCompanies } from '../data/mockData'; // Adjust this import to your file structure
 
 const PortfolioPage = () => {
-  const [data, setData] = useState(mockCompanies); // State for your data
-  const [customFormula, setCustomFormula] = useState(''); // State for the custom formula
-  const [customFormulaError, setCustomFormulaError] = useState(''); // State for custom formula error message
-  const [customResults, setCustomResults] = useState({}); // State for storing custom formula results
+  const [data, setData] = useState(mockCompanies);
+  const [customFormulas, setCustomFormulas] = useState(['']);
+  const [customResults, setCustomResults] = useState({});
+  const [customFormulaErrors, setCustomFormulaErrors] = useState([]);
 
-  // Function to apply the custom formula
-  const applyCustomFormula = () => {
-    try {
-      const newCustomResults = {};
+  const applyCustomFormulas = () => {
+    const newCustomResults = {};
+    const newErrors = Array(customFormulas.length).fill('');
+
+    customFormulas.forEach((formula, index) => {
       data.forEach(company => {
-        const scope = { ...company.quantitative };
-        newCustomResults[company.comp_key] = evaluate(customFormula, scope);
+        try {
+          const scope = { ...company.quantitative };
+          if (!newCustomResults[company.comp_key]) {
+            newCustomResults[company.comp_key] = {};
+          }
+          newCustomResults[company.comp_key][`score${index + 1}`] = evaluate(formula, scope);
+        } catch (error) {
+          newErrors[index] = 'Error in formula. Please check syntax.';
+        }
       });
+    });
 
-      setCustomResults(newCustomResults);
-      setCustomFormulaError('');
-    } catch (error) {
-      console.error('Error evaluating custom formula', error);
-      setCustomFormulaError('Error evaluating formula. Please check your syntax.');
-    }
+    setCustomResults(newCustomResults);
+    setCustomFormulaErrors(newErrors);
   };
 
-  // useMemo for columns
+  const addCustomFormula = () => {
+    setCustomFormulas([...customFormulas, '']);
+  };
+
+  const removeCustomFormula = index => {
+    const newFormulas = customFormulas.filter((_, i) => i !== index);
+    setCustomFormulas(newFormulas);
+  };
+
+  const updateCustomFormula = (index, value) => {
+    const newFormulas = [...customFormulas];
+    newFormulas[index] = value;
+    setCustomFormulas(newFormulas);
+  };
+
   const columns = useMemo(() => [
     {
       Header: 'Portfolio',
@@ -68,47 +87,52 @@ const PortfolioPage = () => {
         accessor: d => d.qualitative[key],
       })),
     },
-    {
-      Header: 'Custom',
+    // Custom Scores columns
+    ...customFormulas.map((_, index) => ({
+      Header: `Custom Score ${index + 1}`,
       columns: [
         {
-          Header: 'Score 1',
-          accessor: company => customResults[company.comp_key] || '',
+          Header: `Score ${index + 1}`,
+          accessor: d => customResults[d.comp_key]?.[`score${index + 1}`] || '',
         },
       ],
-    },
-  ], [customResults]); // Depend on customResults to update the table
+    })),
+  ], [customFormulas, customResults]);
 
-  // useTable hook
+  const tableInstance = useTable({ columns, data }, useSortBy);
+
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+  } = tableInstance;
 
-  // JSX for rendering the table
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Enter custom formula..."
-        value={customFormula}
-        onChange={e => setCustomFormula(e.target.value)}
-      />
-      <button onClick={applyCustomFormula}>Apply Custom Formula</button>
-      {customFormulaError && <div>{customFormulaError}</div>}
+      {customFormulas.map((formula, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            placeholder={`Enter custom formula for Score ${index + 1}...`}
+            value={formula}
+            onChange={e => updateCustomFormula(index, e.target.value)}
+          />
+          <button onClick={() => removeCustomFormula(index)}>Remove</button>
+          {customFormulaErrors[index] && <div>{customFormulaErrors[index]}</div>}
+        </div>
+      ))}
+      <button onClick={addCustomFormula}>Add Custom Score</button>
+      <button onClick={applyCustomFormulas}>Apply Custom Formulas</button>
 
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                // Apply sorting props and render sort direction indicators
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
-                  {/* Add a sort direction indicator */}
                   <span>
                     {column.isSorted
                       ? column.isSortedDesc
