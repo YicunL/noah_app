@@ -13,10 +13,14 @@ const PortfolioPage = () => {
     const newCustomResults = {};
     const newErrors = Array(customFormulas.length).fill('');
 
-    customFormulas.forEach((formula, index) => {
-      data.forEach(company => {
+    data.forEach(company => {
+      customFormulas.forEach((formula, index) => {
         try {
-          const scope = { ...company.quantitative };
+          const scope = {
+            ...company.quantitative,
+            ...company.qualitative,
+            ...newCustomResults[company.comp_key],
+          };
           if (!newCustomResults[company.comp_key]) {
             newCustomResults[company.comp_key] = {};
           }
@@ -30,6 +34,7 @@ const PortfolioPage = () => {
     setCustomResults(newCustomResults);
     setCustomFormulaErrors(newErrors);
   };
+
 
   const addCustomFormula = () => {
     setCustomFormulas([...customFormulas, '']);
