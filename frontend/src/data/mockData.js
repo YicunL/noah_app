@@ -93,7 +93,7 @@ export const mockCompanies = [
     custom: 'Custom formula here',
   },
   {
-    comp_key: 1,
+    comp_key: 4,
     ISIN: "US0378331005",
     symbol: "AAPL",
     name: "Apple Inc.",
@@ -124,7 +124,7 @@ export const mockCompanies = [
     custom: 'Custom formula here',
   },
   {
-    comp_key: 2,
+    comp_key: 5,
     ISIN: "US0378331005",
     symbol: "AAPL",
     name: "Microsoft",
@@ -155,7 +155,7 @@ export const mockCompanies = [
     custom: 'Custom formula here',
   },
   {
-    comp_key: 3,
+    comp_key: 6,
     ISIN: "US0378331005",
     symbol: "AAPL",
     name: "Intel",
@@ -186,7 +186,7 @@ export const mockCompanies = [
     custom: 'Custom formula here',
   },
   {
-    comp_key: 1,
+    comp_key: 7,
     ISIN: "US0378331005",
     symbol: "AAPL",
     name: "Apple Inc.",
@@ -217,7 +217,7 @@ export const mockCompanies = [
     custom: 'Custom formula here',
   },
   {
-    comp_key: 2,
+    comp_key: 8,
     ISIN: "US0378331005",
     symbol: "AAPL",
     name: "Microsoft",
@@ -248,7 +248,7 @@ export const mockCompanies = [
     custom: 'Custom formula here',
   },
   {
-    comp_key: 3,
+    comp_key: 9,
     ISIN: "US0378331005",
     symbol: "AAPL",
     name: "Intel",
