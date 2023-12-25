@@ -1,15 +1,16 @@
 const { Pool } = require('pg');
 
 class AccessDB {
-  constructor(user, password, databaseName, host = 'localhost', port = 5432) {
-    this.pool = new Pool({
-      user: user,
-      password: password,
-      host: host,
-      port: port,
-      database: databaseName
-    });
-  }
+    constructor() {
+        this.pool = new Pool({
+          user: process.env.DB_USER,
+          password: process.env.DB_PASSWORD,
+          host: process.env.DB_HOST,
+          port: process.env.DB_PORT,
+          database: process.env.DB_NAME
+        });
+      }
+
 
   async connect() {
     this.client = await this.pool.connect();
