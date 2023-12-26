@@ -1,21 +1,28 @@
-require('dotenv').config();
-const AccessDB = require('./AccessDB'); // Adjust the path as necessary
+const express = require('express');
+const AccessDB = require('./dbAccess');
 
-app.get('/api/column-names/:tableName', async (req, res) => {
-    const db = new AccessDB('bryanl6779', 'CNeutral_{!>2023<!}', 'devdb');
+require('dotenv').config();
+
+const app = express();
+const db = new AccessDB();
+
+app.use(express.json());
+
+// Example route to fetch data
+app.get('/api/data/comp_basic', async (req, res) => {
     try {
-      await db.connect();
-      const columnNames = await db.getColumnNames(req.params.tableName);
-      res.json(columnNames);
-    } catch (error) {
-      console.error('Failed to get column names:', error);
-      res.status(500).send('Failed to get column names');
-    } finally {
-      await db.closeConnection();
+      const data = await dbAccess.query('comp_basic');
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Server error');
     }
   });
+  
 
-const port = process.env.PORT || 3001;
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+// More routes here...
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
