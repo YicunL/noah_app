@@ -1,28 +1,33 @@
 const express = require('express');
-const AccessDB = require('./dbAccess');
-
-require('dotenv').config();
+const bodyParser = require('body-parser');
+const AccessDB = require('./AccessDB'); 
 
 const app = express();
-const db = new AccessDB();
+const port = 3000;
 
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Example route to fetch data
-app.get('/api/data/comp_basic', async (req, res) => {
+const db = new AccessDB('bryanl6779'); 
+
+// Connect to the database
+db.connect().then(() => {
+    console.log('Connected to the database');
+}).catch(err => {
+    console.error('Failed to connect to the database:', err);
+    process.exit(1);
+});
+
+// Get data from a table
+app.get('/data/:tablename', async (req, res) => {
     try {
-      const data = await dbAccess.query('comp_basic');
-      res.json(data);
+        const data = await db.extract(req.params.tablename);
+        res.json(data);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Server error');
+        res.status(500).send('Error retrieving data');
     }
-  });
-  
+});
 
-// More routes here...
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
