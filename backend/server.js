@@ -18,13 +18,43 @@ db.connect().then(() => {
 });
 
 // Get data from a table
+app.get('/createTable', async (req, res) => {
+  const columnsDict = {
+      id: 'integer PRIMARY KEY',
+      symbol: 'text',
+      name: 'text',
+      country: 'text',
+      website: 'text',
+      description: 'text'
+  };
+  try {
+      await db.create('company_basic', columnsDict);
+      res.send('Table created successfully.');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Error creating table');
+  }
+});
+
+app.delete('/dropTable/:tablename', async (req, res) => {
+  const tableName = req.params.tablename;
+  try {
+      await db.drop(tableName);
+      res.send(`Table '${tableName}' dropped successfully.`);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Error dropping table');
+  }
+});
+
+
 app.get('/data/:tablename', async (req, res) => {
-    try {
-        const data = await db.extract(req.params.tablename);
-        res.json(data);
-    } catch (err) {
-        res.status(500).send('Error retrieving data');
-    }
+  try {
+      const data = await db.extract(req.params.tablename);
+      res.json(data); // Sends the data as a JSON response
+  } catch (err) {
+      res.status(500).send('Error retrieving data');
+  }
 });
 
 // Start the server
