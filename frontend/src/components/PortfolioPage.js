@@ -51,6 +51,26 @@ const PortfolioPage = () => {
     setCustomFormulas(newFormulas);
   };
 
+  const keyToHeaderMapping = {
+    S1: 'Scope 1',
+    S2: 'Scope 2',
+    S3: 'Scope 3',
+    TotalS: 'Total S1-3',
+    Energy: 'Energy Cons.',
+    Renewables: '% Renewables',
+    SBTI: 'SBTI Year',
+    SBTI_Plan: 'SBTI Plan',
+    Bio: 'BioDiversity',
+    Climate: 'Climate Change',
+    Tax: 'Tax Transp.',
+    Water: 'Water Mgt',
+    Right: 'Human Rgts.',
+    Human: 'Human Capital',
+    Consumer: 'Consumer Interests',
+    Children: "Children's Rgts",
+    Corruption: 'Anti Corruption',
+  };
+
   const columns = useMemo(() => [
     {
       Header: 'Portfolio',
@@ -80,14 +100,14 @@ const PortfolioPage = () => {
     {
       Header: 'Quantitative',
       columns: Object.keys(mockCompanies[0].quantitative).map(key => ({
-        Header: key,
+        Header: keyToHeaderMapping[key] || key, // Use the mapping if it exists, otherwise use the key itself
         accessor: d => d.quantitative[key],
       })),
     },
     {
       Header: 'Qualitative',
       columns: Object.keys(mockCompanies[0].qualitative).map(key => ({
-        Header: key,
+        Header: keyToHeaderMapping[key] || key, // Use the mapping if it exists, otherwise use the key itself
         accessor: d => d.qualitative[key],
       })),
     },
