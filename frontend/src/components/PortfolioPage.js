@@ -8,6 +8,8 @@ const PortfolioPage = () => {
   const [customFormulas, setCustomFormulas] = useState(['']);
   const [customResults, setCustomResults] = useState({});
   const [customFormulaErrors, setCustomFormulaErrors] = useState([]);
+  const [weights, setWeights] = useState([]);
+  const [returnDeltas, setReturnDeltas] = useState([]);
 
 
   const applyCustomFormulas = () => {
@@ -52,6 +54,17 @@ const PortfolioPage = () => {
     setCustomFormulas(newFormulas);
   };
 
+  const handleWeightChange = (key, e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up to the header
+    const newValue = e.target.value; // Correctly get the current value of the input
+    setWeights(prevWeights => ({ ...prevWeights, [key]: newValue }));
+  };
+  
+  const handleReturnDeltaChange = (key, e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up to the header
+    const newValue = e.target.value; // Correctly get the current value of the input
+    setReturnDeltas(prevReturnDeltas => ({ ...prevReturnDeltas, [key]: newValue }));
+  };
 
 
   const keyToHeaderMapping = {
@@ -78,7 +91,7 @@ const PortfolioPage = () => {
 
   const columns = useMemo(() => [
     {
-      Header: 'Portfolio',
+      Header: 'Basic',
       columns: [
         {
           Header: 'No',
@@ -104,17 +117,73 @@ const PortfolioPage = () => {
     },
     {
       Header: 'Quantitative',
-      columns: Object.keys(mockCompanies[0].quantitative).map(key => ({
-        Header: keyToHeaderMapping[key] || key,
-        accessor: d => d.quantitative[key],
-      })),
+      columns: Object.keys(mockCompanies[0].quantitative).map(key => {
+        const weightKey = `weight_quantitative_${key}`;
+        const deltaKey = `delta_quantitative_${key}`;
+        return {
+          Header: () => (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              {keyToHeaderMapping[key] || key}
+              {/* Weight input */}
+              <input
+                type="number"
+                value={weights[weightKey] || ''}
+                onChange={(e) => handleWeightChange(weightKey, e)}
+                style={{ width: '100%', padding: '2px', margin: '2px 0' }}
+                placeholder={`Weight for ${key}`}
+                onClick={(e) => e.stopPropagation()}
+              />
+              {/* Return Delta input */}
+              <input
+                type="number"
+                value={returnDeltas[deltaKey] || ''}
+                onChange={(e) => handleReturnDeltaChange(deltaKey, e)}
+                style={{ width: '100%', padding: '2px', margin: '2px 0' }}
+                placeholder={`Delta for ${key}`}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          ),
+          accessor: `quantitative.${key}`,
+          id: weightKey,
+        };
+      }),
     },
+
+    // Columns for Qualitative data
     {
       Header: 'Qualitative',
-      columns: Object.keys(mockCompanies[0].qualitative).map(key => ({
-        Header: keyToHeaderMapping[key] || key,
-        accessor: d => d.qualitative[key],
-      })),
+      columns: Object.keys(mockCompanies[0].qualitative).map(key => {
+        const weightKey = `weight_qualitative_${key}`;
+        const deltaKey = `delta_qualitative_${key}`;
+        return {
+          Header: () => (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              {keyToHeaderMapping[key] || key}
+              {/* Weight input */}
+              <input
+                type="number"
+                value={weights[weightKey] || ''}
+                onChange={(e) => handleWeightChange(weightKey, e)}
+                style={{ width: '100%', padding: '2px', margin: '2px 0' }}
+                placeholder={`Weight for ${key}`}
+                onClick={(e) => e.stopPropagation()}
+              />
+              {/* Return Delta input */}
+              <input
+                type="number"
+                value={returnDeltas[deltaKey] || ''}
+                onChange={(e) => handleReturnDeltaChange(deltaKey, e)}
+                style={{ width: '100%', padding: '2px', margin: '2px 0' }}
+                placeholder={`Delta for ${key}`}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          ),
+          accessor: `qualitative.${key}`,
+          id: weightKey,
+        };
+      }),
     },
     // Custom Scores column
     {
@@ -124,7 +193,7 @@ const PortfolioPage = () => {
         accessor: d => customResults[d.comp_key]?.[`score${index + 1}`] || '',
       })),
     },
-  ], [customFormulas, customResults]);
+  ], [customFormulas, customResults, weights, returnDeltas]);
 
   
 
@@ -195,7 +264,7 @@ const PortfolioPage = () => {
           </tbody>
         </table>
       </div>
-      <div style={{ minWidth: '300px', padding: '10px' }}> {/* Adjust the width and padding as needed */}
+      <div style={{ minWidth: '300px', padding: '10px' }}> 
         {customFormulas.map((formula, index) => (
           <div key={index} style={{ marginBottom: '10px' }}>
             <input
