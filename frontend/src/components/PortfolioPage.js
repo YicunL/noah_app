@@ -61,8 +61,8 @@ const PortfolioPage = () => {
   };
   
   const handleReturnDeltaChange = (key, e) => {
-    e.stopPropagation(); // Prevent the click event from bubbling up to the header
-    const newValue = e.target.value; // Correctly get the current value of the input
+    e.stopPropagation(); 
+    const newValue = e.target.value; 
     setReturnDeltas(prevReturnDeltas => ({ ...prevReturnDeltas, [key]: newValue }));
   };
 
@@ -113,7 +113,42 @@ const PortfolioPage = () => {
           Header: 'Sector',
           accessor: 'sector',
         },
+        {
+          Header: 'Notional',
+          id: 'notional',
+          Cell: () => null
+        },
       ],
+    },
+    {
+      Header: 'Return',
+      columns: [
+        {
+          Header: '3m $',
+          id: '3r',
+          Cell: () => null
+        },
+        {
+          Header: '6m $',
+          id: '6r',
+          Cell: () => null
+        }
+      ]
+    },
+    {
+      Header: 'Volatility',
+      columns: [
+        {
+          Header: '3m $',
+          id: '3v',
+          Cell: () => null
+        },
+        {
+          Header: '6m $',
+          id: '6v',
+          Cell: () => null
+        }
+      ]
     },
     {
       Header: 'Quantitative',
