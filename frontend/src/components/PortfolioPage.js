@@ -10,6 +10,7 @@ const PortfolioPage = () => {
   const [customFormulaErrors, setCustomFormulaErrors] = useState([]);
   const [weights, setWeights] = useState([]);
   const [returnDeltas, setReturnDeltas] = useState([]);
+  const [rowWeights, setRowWeights] = useState({});
 
 
   const applyCustomFormulas = () => {
@@ -66,6 +67,13 @@ const PortfolioPage = () => {
     setReturnDeltas(prevReturnDeltas => ({ ...prevReturnDeltas, [key]: newValue }));
   };
 
+  const handleWeightChangeCompany = (comp_key, newValue) => {
+    setRowWeights(prevWeights => ({
+      ...prevWeights,
+      [comp_key]: newValue
+    }));
+  };
+
 
   const keyToHeaderMapping = {
     S1: 'Scope 1',
@@ -118,6 +126,26 @@ const PortfolioPage = () => {
           id: 'notional',
           Cell: () => null
         },
+        {
+          Header: 'Weights',
+          id: 'weights',
+          // Use comp_key as a unique identifier
+          accessor: row => rowWeights[row.comp_key] || '',
+          Cell: ({ row }) => (
+            <input
+              type="number"
+              value={rowWeights[row.comp_key] || ''}
+              onChange={e => {
+                // Prevent sorting when changing the weight
+                e.stopPropagation();
+                // Update the weight for this row using comp_key
+                handleWeightChange(row.comp_key, e.target.value);
+              }}
+              // You can add additional styles or classes as needed
+              style={{ width: '100%' }}
+            />
+          )
+        }
       ],
     },
     {
@@ -228,7 +256,7 @@ const PortfolioPage = () => {
         accessor: d => customResults[d.comp_key]?.[`score${index + 1}`] || '',
       })),
     },
-  ], [customFormulas, customResults, weights, returnDeltas]);
+  ], [customFormulas, customResults, weights, returnDeltas, rowWeights]);
 
   
 
