@@ -84,14 +84,15 @@ const PortfolioPage = () => {
     Renewables: '% Renewables',
     SBTI: 'SBTI Year',
     SBTI_Plan: 'SBTI Plan',
-    Bio: 'BioDiversity',
+    Bio: 'Bio Diversity',
     Climate: 'Climate Change',
     Tax: 'Tax Transp.',
-    Water: 'Water Mgt',
+    Water: 'Water Mgt.',
     Right: 'Human Rgts.',
-    Human: 'Human Capital',
+    Ocean: 'Ocean Sustain.',
+    Capital: 'Human Capital',
     Consumer: 'Consumer Interests',
-    Children: "Children's Rgts",
+    Children: "Children's Rgts.",
     Corruption: 'Anti Corruption',
   };
 
@@ -141,7 +142,6 @@ const PortfolioPage = () => {
                 // Update the weight for this row using comp_key
                 handleWeightChange(row.comp_key, e.target.value);
               }}
-              // You can add additional styles or classes as needed
               style={{ width: '100%' }}
             />
           )
@@ -174,6 +174,17 @@ const PortfolioPage = () => {
         {
           Header: '6m $',
           id: '6v',
+          Cell: () => null
+        }
+      ]
+    },
+    {
+      Header: () => <>&nbsp;</>, // Renders a non-breaking space in the header
+      id: 'emptyHeader', // Unique identifier for the column
+      columns: [
+        {
+          Header: 'Adj Weight',
+          accessor: 'adjWeight', // You need an accessor or provide an id if this column won't bind to data
           Cell: () => null
         }
       ]
@@ -277,17 +288,6 @@ const PortfolioPage = () => {
           <div>
             <div>Portfolio: NPF Equities All</div>
             <div>Gross Return: </div>
-          </div>
-          <div>
-            <div> &nbsp; </div>
-            <div>Factor Weights -{'>'} </div>
-            <div>Return Delta -{'>'}</div>
-          </div>
-          <div>
-            <div>Return</div>
-          </div>
-          <div>
-            <div>Volatility</div>
           </div>
           <div>
             <div>Currency: USD</div>
