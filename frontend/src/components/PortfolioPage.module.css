@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .tableWrapper {
+    flex: 1;
+  }
+  
+  .customFormulasWrapper {
+    min-width: 300px;
+    padding: 10px;
+  }
+  

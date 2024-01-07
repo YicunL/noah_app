@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import { evaluate } from 'mathjs';
 import { mockCompanies } from '../data/mockData'; 
+import styles from './PortfolioPage.module.css';
 
 const PortfolioPage = () => {
   const [data, setData] = useState(mockCompanies);
@@ -72,6 +73,13 @@ const PortfolioPage = () => {
       ...prevWeights,
       [comp_key]: newValue
     }));
+  };
+
+  const handleKeyPress = (event, index) => {
+    if (event.key === 'Enter') {
+      applyCustomFormulas();
+      event.preventDefault(); 
+    }
   };
 
 
@@ -179,12 +187,12 @@ const PortfolioPage = () => {
       ]
     },
     {
-      Header: () => <>&nbsp;</>, // Renders a non-breaking space in the header
-      id: 'emptyHeader', // Unique identifier for the column
+      Header: () => <>&nbsp;</>, 
+      id: 'emptyHeader', 
       columns: [
         {
           Header: 'Adj Weight',
-          accessor: 'adjWeight', // You need an accessor or provide an id if this column won't bind to data
+          accessor: 'adjWeight', 
           Cell: () => null
         }
       ]
@@ -282,8 +290,8 @@ const PortfolioPage = () => {
   } = tableInstance;
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <div style={{ flex: 1 }}>
+    <div className={styles.container}>
+      <div className={styles.tableWrapper}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
           <div>
             <div>Portfolio: NPF Equities All</div>
@@ -327,22 +335,28 @@ const PortfolioPage = () => {
           </tbody>
         </table>
       </div>
-      <div style={{ minWidth: '300px', padding: '10px' }}> 
+      <div className={styles.customFormulasWrapper}>
         {customFormulas.map((formula, index) => (
-          <div key={index} style={{ marginBottom: '10px' }}>
+          <div key={index} className={styles.customFormulaInputWrapper}>
             <input
               type="text"
-              placeholder={`Enter custom formula for Score ${index + 1}...`}
+              placeholder={`Enter custom formula for Score ${index + 1}`}
               value={formula}
               onChange={e => updateCustomFormula(index, e.target.value)}
-              style={{ width: '100%', marginBottom: '5px' }}
+              onKeyPress={e => handleKeyPress(index, e)}
+              className={styles.customFormulaInput}
             />
-            <button onClick={() => removeCustomFormula(index)}>Remove</button>
-            {customFormulaErrors[index] && <div style={{ color: 'red' }}>{customFormulaErrors[index]}</div>}
+            {index === customFormulas.length - 1 && (
+              <button onClick={addCustomFormula} className={styles.addCustomScoreButton}>
+                Add Custom Score
+              </button>
+            )}
+            <button onClick={() => removeCustomFormula(index)} className={styles.removeCustomScoreButton}>
+              Remove
+            </button>
           </div>
         ))}
-        <button onClick={addCustomFormula} style={{ marginRight: '5px' }}>Add Custom Score</button>
-        <button onClick={applyCustomFormulas}>Apply Custom Formulas</button>
+        {/* Remove the Apply Custom Formulas button if it's no longer needed */}
       </div>
     </div>
   );
