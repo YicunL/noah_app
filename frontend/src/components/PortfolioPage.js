@@ -48,6 +48,17 @@ const PortfolioPage = () => {
   const removeCustomFormula = index => {
     const newFormulas = customFormulas.filter((_, i) => i !== index);
     setCustomFormulas(newFormulas);
+    const newCustomResults = { ...customResults };
+    for (const key in newCustomResults) {
+      delete newCustomResults[key][`score${index + 1}`];
+    }
+    setCustomResults(newCustomResults);
+    const newData = data.map(row => {
+      const newRow = { ...row };
+      delete newRow[`score${index + 1}`];
+      return newRow;
+    });
+    setData(newData);
   };
 
   const updateCustomFormula = (index, value) => {
@@ -81,6 +92,32 @@ const PortfolioPage = () => {
       event.preventDefault(); 
     }
   };
+
+  const getCustomFormulaColumns = () => {
+    return customFormulas.map((formula, index) => ({
+      Header: () => (
+        <div>
+          <div style={{ fontWeight: 'bold' }}>{`Custom Score ${index + 1}`}</div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <input
+              type="text"
+              placeholder={`Score ${index + 1}`}
+              value={formula}
+              onChange={e => updateCustomFormula(index, e.target.value)}
+              onKeyPress={e => handleKeyPress(e, index)}
+              onClick={e => e.stopPropagation()} // Prevent input click from triggering sorting
+            />
+            <button onClick={() => removeCustomFormula(index)}>Remove</button>
+          </div>
+        </div>
+      ),
+      accessor: `score${index + 1}`,
+      Cell: ({ row }) => customResults[row.original.comp_key]?.[`score${index + 1}`] || '',
+      disableSortBy: false, // Enable sorting for this column
+    }));
+  };
+
+  
 
 
   const keyToHeaderMapping = {
@@ -268,13 +305,7 @@ const PortfolioPage = () => {
       }),
     },
     // Custom Scores column
-    {
-      Header: 'Custom',
-      columns: customFormulas.map((_, index) => ({
-        Header: `Score ${index + 1}`,
-        accessor: d => customResults[d.comp_key]?.[`score${index + 1}`] || '',
-      })),
-    },
+    ...getCustomFormulaColumns(),
   ], [customFormulas, customResults, weights, returnDeltas, rowWeights]);
 
   
@@ -301,6 +332,10 @@ const PortfolioPage = () => {
             <div>Currency: USD</div>
             <div>Year: 2021</div>
           </div>
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>Custom</span>
+          <button onClick={addCustomFormula} style={{ marginLeft: '10px' }}>Add Custom Score</button>
         </div>
         <table {...getTableProps()}>
           <thead>
@@ -334,29 +369,6 @@ const PortfolioPage = () => {
             })}
           </tbody>
         </table>
-      </div>
-      <div className={styles.customFormulasWrapper}>
-        {customFormulas.map((formula, index) => (
-          <div key={index} className={styles.customFormulaInputWrapper}>
-            <input
-              type="text"
-              placeholder={`Enter custom formula for Score ${index + 1}`}
-              value={formula}
-              onChange={e => updateCustomFormula(index, e.target.value)}
-              onKeyPress={e => handleKeyPress(index, e)}
-              className={styles.customFormulaInput}
-            />
-            {index === customFormulas.length - 1 && (
-              <button onClick={addCustomFormula} className={styles.addCustomScoreButton}>
-                Add Custom Score
-              </button>
-            )}
-            <button onClick={() => removeCustomFormula(index)} className={styles.removeCustomScoreButton}>
-              Remove
-            </button>
-          </div>
-        ))}
-        {/* Remove the Apply Custom Formulas button if it's no longer needed */}
       </div>
     </div>
   );
