@@ -61,10 +61,47 @@ const PortfolioPage = () => {
     setData(newData);
   };
 
-  const updateCustomFormula = (index, value) => {
-    const newFormulas = [...customFormulas];
-    newFormulas[index] = value;
-    setCustomFormulas(newFormulas);
+  const updateCustomFormula = (index, newFormula) => {
+    setCustomFormulas(customFormulas.map((formula, i) => i === index ? newFormula : formula));
+  };
+
+  const CustomFormulaInput = ({ index, initialFormula, onFormulaChange, onRemove }) => {
+    const [formula, setFormula] = useState(initialFormula);
+  
+    const handleInputChange = (e) => {
+      e.stopPropagation();
+      setFormula(e.target.value);
+    };
+  
+    const handleBlur = () => {
+      onFormulaChange(index, formula);
+    };
+  
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        onFormulaChange(index, formula);
+        e.preventDefault();
+      }
+    };
+
+    const handleClick = (e) => {
+      e.stopPropagation();
+    };
+  
+    return (
+      <div style={{ display: 'flex', alignItems: 'center' }} onClick={handleClick}>
+        <input
+          type="text"
+          placeholder={`Score ${index + 1}`}
+          value={formula}
+          onChange={handleInputChange}
+          onBlur={handleBlur}
+          onKeyPress={handleKeyPress}
+          onClick={handleClick}
+        />
+        <button onClick={(e) => { e.stopPropagation(); onRemove(index); }}>Remove</button>
+      </div>
+    );
   };
 
   const handleWeightChange = (key, e) => {
@@ -98,22 +135,18 @@ const PortfolioPage = () => {
       Header: () => (
         <div>
           <div style={{ fontWeight: 'bold' }}>{`Custom Score ${index + 1}`}</div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <input
-              type="text"
-              placeholder={`Score ${index + 1}`}
-              value={formula}
-              onChange={e => updateCustomFormula(index, e.target.value)}
-              onKeyPress={e => handleKeyPress(e, index)}
-              onClick={e => e.stopPropagation()} // Prevent input click from triggering sorting
-            />
-            <button onClick={() => removeCustomFormula(index)}>Remove</button>
-          </div>
+          <CustomFormulaInput
+            key={`custom-formula-${index}`}
+            index={index}
+            initialFormula={formula}
+            onFormulaChange={updateCustomFormula}
+            onRemove={removeCustomFormula}
+          />
         </div>
       ),
       accessor: `score${index + 1}`,
       Cell: ({ row }) => customResults[row.original.comp_key]?.[`score${index + 1}`] || '',
-      disableSortBy: false, // Enable sorting for this column
+      disableSortBy: false,
     }));
   };
 
