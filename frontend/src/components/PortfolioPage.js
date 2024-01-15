@@ -13,6 +13,16 @@ const PortfolioPage = () => {
   const [returnDeltas, setReturnDeltas] = useState([]);
   const [rowWeights, setRowWeights] = useState({});
 
+  const initialColumnVisibility = {
+    comp_key: true,
+    ISIN: true,
+    name: true,
+    country: true,
+    sector: true,
+  };
+  
+  const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility);
+
 
   const applyCustomFormulas = () => {
     const newCustomResults = {};
@@ -80,6 +90,7 @@ const PortfolioPage = () => {
     const handleKeyPress = (e) => {
       if (e.key === 'Enter') {
         onFormulaChange(index, formula);
+        applyCustomFormulas();
         e.preventDefault();
       }
     };

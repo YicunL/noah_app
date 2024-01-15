@@ -12,3 +12,18 @@
     padding: 10px;
   }
   
+  .resizableContainer {
+    resize: both;
+    overflow: auto;
+    position: relative;
+}
+
+.resizeHandle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    cursor: se-resize;
+}
