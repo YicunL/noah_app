@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import { evaluate } from 'mathjs';
 import { mockCompanies } from '../data/mockData'; 
@@ -75,6 +75,11 @@ const PortfolioPage = () => {
     setCustomFormulas(customFormulas.map((formula, i) => i === index ? newFormula : formula));
   };
 
+  useEffect(() => {
+    applyCustomFormulas();
+  }, [customFormulas]);
+  
+
   const CustomFormulaInput = ({ index, initialFormula, onFormulaChange, onRemove }) => {
     const [formula, setFormula] = useState(initialFormula);
   
@@ -89,9 +94,8 @@ const PortfolioPage = () => {
   
     const handleKeyPress = (e) => {
       if (e.key === 'Enter') {
-        onFormulaChange(index, formula);
-        applyCustomFormulas();
         e.preventDefault();
+        onFormulaChange(index, e.target.value); 
       }
     };
 
