@@ -5,6 +5,7 @@
   
   .tableWrapper {
     flex: 1;
+    overflow: auto;
   }
   
   .customFormulasWrapper {
@@ -26,4 +27,9 @@
     height: 10px;
     background: #ccc;
     cursor: se-resize;
+}
+
+.scaledTable {
+  transform-origin: top left; 
+  transition: transform 0.3s ease; 
 }

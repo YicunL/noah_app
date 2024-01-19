@@ -5,6 +5,31 @@ import { mockCompanies } from '../data/mockData';
 import styles from './PortfolioPage.module.css';
 
 const PortfolioPage = () => {
+  const [portfolioID, setPortfolioID] = useState('unique-portfolio-id'); 
+  const [portfolioName, setPortfolioName] = useState('NPF Equities All');
+  const [creationDate, setCreationDate] = useState(new Date().toISOString());
+  const [lastUpdated, setLastUpdated] = useState(new Date().toISOString());
+  const [status, setStatus] = useState('Active'); // Archived,Draft etc...
+
+  // savePortfolio
+  const savePortfolio = async () => {
+    const portfolioData = {
+      PortfolioID: portfolioID,
+      PortfolioName: portfolioName,
+      CreationDate: creationDate,
+      LastUpdated: new Date().toISOString(),
+      Content: {
+        customFormulas,
+        scale,
+      },
+      Comments: '',
+      Status: status,
+    };
+
+    //API call here, wait implementation
+  };
+
+
   const [data, setData] = useState(mockCompanies);
   const [customFormulas, setCustomFormulas] = useState(['']);
   const [customResults, setCustomResults] = useState({});
@@ -12,6 +37,11 @@ const PortfolioPage = () => {
   const [weights, setWeights] = useState([]);
   const [returnDeltas, setReturnDeltas] = useState([]);
   const [rowWeights, setRowWeights] = useState({});
+  const [scale, setScale] = useState(1);
+
+  const adjustScale = (newScale) => {
+    setScale(newScale);
+  };
 
   const initialColumnVisibility = {
     comp_key: true,
@@ -22,6 +52,13 @@ const PortfolioPage = () => {
   };
   
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility);
+
+  const handleVisibilityChange = (column) => {
+    setColumnVisibility(prevState => ({
+      ...prevState,
+      [column]: !prevState[column]
+    }));
+  };
 
 
   const applyCustomFormulas = () => {
@@ -165,6 +202,8 @@ const PortfolioPage = () => {
     }));
   };
 
+
+  
   
 
 
@@ -198,18 +237,22 @@ const PortfolioPage = () => {
         {
           Header: 'No',
           accessor: 'comp_key',
+          show: columnVisibility['comp_key'],
         },
         {
           Header: 'ISIN',
           accessor: 'ISIN',
+          show: columnVisibility['ISIN'],
         },
         {
           Header: 'Name',
           accessor: 'name',
+          show: columnVisibility['name'],
         },
         {
           Header: 'Country',
           accessor: 'country',
+          show: columnVisibility['country'],
         },
         {
           Header: 'Sector',
@@ -354,7 +397,7 @@ const PortfolioPage = () => {
     },
     // Custom Scores column
     ...getCustomFormulaColumns(),
-  ], [customFormulas, customResults, weights, returnDeltas, rowWeights]);
+  ], [customFormulas, customResults, weights, returnDeltas, rowWeights, columnVisibility]);
 
   
 
@@ -385,6 +428,32 @@ const PortfolioPage = () => {
           <span style={{ fontWeight: 'bold' }}>Custom</span>
           <button onClick={addCustomFormula} style={{ marginLeft: '10px' }}>Add Custom Score</button>
         </div>
+        <div>
+          {Object.keys(columnVisibility).map((column, index) => (
+            <div key={index}>
+              <input
+                type="checkbox"
+                checked={columnVisibility[column]}
+                onChange={() => handleVisibilityChange(column)}
+              />
+              {column}
+            </div>
+          ))}
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="scaleSlider">Adjust Table Size:</label>
+          <input
+            id="scaleSlider"
+            type="range"
+            min="0.5" // Minimum scale
+            max="1.5" // Maximum scale
+            step="0.1" // Step size
+            value={scale}
+            onChange={(e) => setScale(parseFloat(e.target.value))}
+            style={{ marginLeft: '10px' }}
+          />
+        </div>
+        <div style={{ transform: `scale(${scale})`, transformOrigin: 'top left' }}>
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
@@ -404,7 +473,7 @@ const PortfolioPage = () => {
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()}>
+          <tbody {...getTableBodyProps()} className={styles.scaledTable}>
             {rows.map(row => {
               prepareRow(row);
               return (
@@ -417,6 +486,7 @@ const PortfolioPage = () => {
             })}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );
