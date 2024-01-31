@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, useResizeColumns } from 'react-table';
 import { evaluate } from 'mathjs';
 import { mockCompanies } from '../data/mockData'; 
 import styles from './PortfolioPage.module.css';
@@ -238,30 +238,42 @@ const PortfolioPage = () => {
           Header: 'No',
           accessor: 'comp_key',
           show: columnVisibility['comp_key'],
+          width: 150,
+          canResize: true,
         },
         {
           Header: 'ISIN',
           accessor: 'ISIN',
           show: columnVisibility['ISIN'],
+          width: 150,
+          canResize: true,
         },
         {
           Header: 'Name',
           accessor: 'name',
           show: columnVisibility['name'],
+          width: 150,
+          canResize: true,
         },
         {
           Header: 'Country',
           accessor: 'country',
           show: columnVisibility['country'],
+          width: 150,
+          canResize: true,
         },
         {
           Header: 'Sector',
           accessor: 'sector',
+          width: 150,
+          canResize: true,
         },
         {
           Header: 'Notional',
           id: 'notional',
-          Cell: () => null
+          Cell: () => null,
+          width: 150,
+          canResize: true,
         },
         {
           Header: 'Weights',
@@ -280,7 +292,9 @@ const PortfolioPage = () => {
               }}
               style={{ width: '100%' }}
             />
-          )
+          ),
+          width: 150,
+          canResize: true,
         }
       ],
     },
@@ -290,12 +304,16 @@ const PortfolioPage = () => {
         {
           Header: '3m $',
           id: '3r',
-          Cell: () => null
+          Cell: () => null,
+          width: 150,
+          canResize: true,
         },
         {
           Header: '6m $',
           id: '6r',
-          Cell: () => null
+          Cell: () => null,
+          width: 150,
+          canResize: true,
         }
       ]
     },
@@ -305,12 +323,16 @@ const PortfolioPage = () => {
         {
           Header: '3m $',
           id: '3v',
-          Cell: () => null
+          Cell: () => null,
+          width: 150,
+          canResize: true,
         },
         {
           Header: '6m $',
           id: '6v',
-          Cell: () => null
+          Cell: () => null,
+          width: 150,
+          canResize: true,
         }
       ]
     },
@@ -321,7 +343,9 @@ const PortfolioPage = () => {
         {
           Header: 'Adj Weight',
           accessor: 'adjWeight', 
-          Cell: () => null
+          Cell: () => null,
+          width: 150,
+          canResize: true,
         }
       ]
     },
@@ -356,6 +380,8 @@ const PortfolioPage = () => {
           ),
           accessor: `quantitative.${key}`,
           id: weightKey,
+          width: 150,
+          canResize: true,
         };
       }),
     },
@@ -392,6 +418,8 @@ const PortfolioPage = () => {
           ),
           accessor: `qualitative.${key}`,
           id: weightKey,
+          width: 150,
+          canResize: true,
         };
       }),
     },
@@ -401,7 +429,7 @@ const PortfolioPage = () => {
 
   
 
-  const tableInstance = useTable({ columns, data }, useSortBy);
+  const tableInstance = useTable({ columns, data }, useSortBy, useResizeColumns);
 
   const {
     getTableProps,
@@ -455,24 +483,29 @@ const PortfolioPage = () => {
         </div>
         <div style={{ transform: `scale(${scale})`, transformOrigin: 'top left' }}>
         <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? ' 🔽'
-                          : ' 🔼'
-                        : ''}
-                    </span>
-                  </th>
-                ))}
-              </tr>
+        <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render('Header')}
+                {/* Add a span for sorting icons if needed */}
+                <span>
+                  {column.isSorted
+                    ? column.isSortedDesc
+                      ? ' 🔽'
+                      : ' 🔼'
+                    : ''}
+                </span>
+                {/* Add resizer div */}
+                {column.canResize && (
+                  <div {...column.getResizerProps()} className={`${styles.resizer} ${column.isResizing ? styles.isResizing : ''}`} />
+                )}
+              </th>
             ))}
-          </thead>
+          </tr>
+        ))}
+      </thead>
           <tbody {...getTableBodyProps()} className={styles.scaledTable}>
             {rows.map(row => {
               prepareRow(row);

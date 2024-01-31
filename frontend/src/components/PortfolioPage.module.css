@@ -33,3 +33,20 @@
   transform-origin: top left; 
   transition: transform 0.3s ease; 
 }
+
+.resizer {
+  display: inline-block;
+  background: gray;
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(50%);
+  z-index: 1;
+  touch-action:none;
+}
+
+.isResizing {
+  background: red;
+}
