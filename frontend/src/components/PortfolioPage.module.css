@@ -1,7 +1,10 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-  }
+  display: flex;
+  justify-content: space-between;
+  background-color: #07002A; 
+  color: #FFFFFF; 
+  min-height: 100vh;
+}
   
   .tableWrapper {
     flex: 1;
