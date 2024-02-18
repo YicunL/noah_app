@@ -442,7 +442,7 @@ const PortfolioPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.tableWrapper}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <div>
             <div>Portfolio: NPF Equities All</div>
             <div>Gross Return: </div>
