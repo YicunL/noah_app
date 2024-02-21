@@ -38,6 +38,15 @@ const PortfolioPage = () => {
   const [returnDeltas, setReturnDeltas] = useState([]);
   const [rowWeights, setRowWeights] = useState({});
   const [scale, setScale] = useState(1);
+  const [showUpperFrame, setShowUpperFrame] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowUpperFrame(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowUpperFrame(false);
+  };
 
   const adjustScale = (newScale) => {
     setScale(newScale);
@@ -441,6 +450,22 @@ const PortfolioPage = () => {
 
   return (
     <div className={styles.container}>
+      {showUpperFrame && (
+        <div className={styles.upperFrame} onMouseLeave={handleMouseLeave}>
+          <button className={styles.upperFrameButton}>Expectation</button>
+          <button className={styles.upperFrameButton}>Portfolio</button>
+        </div>
+      )}
+      
+      {/* Navigation Bar */}
+      <div className={styles.navBar} onMouseLeave={handleMouseLeave}>
+        <div className={styles.logo}>NOAH</div>
+        <div className={styles.navItems}>
+          <button className={styles.navButton} onMouseEnter={handleMouseEnter}>Asset Managers</button>
+          <button className={styles.navButton}>Companies</button>
+          <button className={styles.navButton}>Public</button>
+        </div>
+      </div>
       <div className={styles.tableWrapper}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <div>

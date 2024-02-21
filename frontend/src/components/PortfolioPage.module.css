@@ -1,9 +1,10 @@
 .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container fills at least the whole viewport height */
   background-color: #07002A; 
-  color: #FFFFFF; 
-  min-height: 100vh;
+  color: #FFFFFF;
+  position: relative; /* For positioning the upper frame absolutely relative to this container */
 }
   
 .tableWrapper {
@@ -53,4 +54,49 @@
 
 .isResizing {
   background: red;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #07002A; 
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navItems {
+}
+
+.navButton {
+  background: transparent;
+  border: none;
+  color: white;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.upperFrame {
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+  background-color: #333; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; 
+}
+
+.upperFrameButton {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  margin-right: 20px;
+  cursor: pointer;
 }
