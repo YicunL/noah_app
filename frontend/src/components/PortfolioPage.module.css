@@ -65,20 +65,26 @@
   padding: 10px 20px;
 }
 
+.navItems {
+  display: flex;
+  align-items: center; /* This ensures that items in the navItems are vertically centered */
+  justify-content: center; /* Add this to align your buttons in the middle */
+}
+
 .logo {
   font-size: 24px;
   font-weight: bold;
 }
 
-.navItems {
-}
+
 
 .navButton {
   background: transparent;
   border: none;
   color: white;
-  margin-left: 20px;
+  margin-left: 20px; /* Adjust the margin as needed */
   cursor: pointer;
+  font-size: 16px; /* Adjust this value to change the font size of buttons */
 }
 
 .upperFrame {

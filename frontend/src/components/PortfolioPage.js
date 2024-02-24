@@ -3,6 +3,8 @@ import { useTable, useSortBy, useResizeColumns } from 'react-table';
 import { evaluate } from 'mathjs';
 import { mockCompanies } from '../data/mockData'; 
 import styles from './PortfolioPage.module.css';
+import newLogo from './Logo.png'; 
+
 
 const PortfolioPage = () => {
   const [portfolioID, setPortfolioID] = useState('unique-portfolio-id'); 
@@ -459,7 +461,9 @@ const PortfolioPage = () => {
       
       {/* Navigation Bar */}
       <div className={styles.navBar} onMouseLeave={handleMouseLeave}>
-        <div className={styles.logo}>NOAH</div>
+        <div className={styles.logo}>
+          <img src={newLogo} alt="Logo" style={{ width: 'auto', height: '50px' }} /> {/* Adjust width and height as needed */}
+        </div>
         <div className={styles.navItems}>
           <button className={styles.navButton} onMouseEnter={handleMouseEnter}>Asset Managers</button>
           <button className={styles.navButton}>Companies</button>
