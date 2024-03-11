@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 .container {
   display: flex;
+  font-family: 'Inter', sans-serif;;
   flex-direction: column;
   min-height: 100vh; /* Ensures the container fills at least the whole viewport height */
-  background-color: #07002A; 
+  background-color: #07002A;
+  /*#07002A; */
   color: #FFFFFF;
   position: relative; /* For positioning the upper frame absolutely relative to this container */
 }
@@ -55,25 +59,37 @@
 .isResizing {
   background: red;
 }
-
 .navBar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background-color: #07002A; 
+  background-color: #07002A;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 0;
 }
 
 .navItems {
   display: flex;
-  align-items: center; /* This ensures that items in the navItems are vertically centered */
-  justify-content: center; /* Add this to align your buttons in the middle */
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navButton {
+  background: transparent;
+  border: none;
+  color: white;
+  margin-left: 30px;
+  cursor: pointer;
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  position: absolute;
+  left: 10px;
+  display: flex;
+  align-items: center;
 }
 
 
@@ -84,20 +100,24 @@
   color: white;
   margin-left: 20px; /* Adjust the margin as needed */
   cursor: pointer;
-  font-size: 16px; /* Adjust this value to change the font size of buttons */
+  font-size: 24px; /* Adjust this value to change the font size of buttons */
 }
 
+
+
 .upperFrame {
-  display: flex;
-  justify-content: start;
-  padding: 10px;
-  background-color: #333; 
   position: absolute;
-  top: 0;
+  top: 60px; /* Adjust this value as needed to position it just under the navigation bar */
   left: 0;
-  width: 100%;
-  z-index: 10; 
+  width: 100%; /* Make it full width */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+
 
 .upperFrameButton {
   background: transparent;

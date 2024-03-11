@@ -451,7 +451,7 @@ const PortfolioPage = () => {
   } = tableInstance;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} >
       {showUpperFrame && (
         <div className={styles.upperFrame} onMouseLeave={handleMouseLeave}>
           <button className={styles.upperFrameButton}>Expectation</button>
@@ -460,16 +460,20 @@ const PortfolioPage = () => {
       )}
       
       {/* Navigation Bar */}
-      <div className={styles.navBar} onMouseLeave={handleMouseLeave}>
+      <div className={styles.navContainer} style={{ marginTop: '20px', display: 'flex', alignItems: 'center' }}>
         <div className={styles.logo}>
-          <img src={newLogo} alt="Logo" style={{ width: 'auto', height: '50px' }} /> {/* Adjust width and height as needed */}
+          <img src={newLogo} alt="Logo" style={{ width: 'auto', height: '50px' }} />
         </div>
-        <div className={styles.navItems}>
-          <button className={styles.navButton} onMouseEnter={handleMouseEnter}>Asset Managers</button>
-          <button className={styles.navButton}>Companies</button>
-          <button className={styles.navButton}>Public</button>
+        <div className={styles.navBar} onMouseLeave={handleMouseLeave}>
+          <div className={styles.navItems}>
+            <button className={styles.navButton} onMouseEnter={handleMouseEnter}style={{ fontSize: '18px' }}>Asset Managers</button>
+            <button className={styles.navButton}style={{ fontSize: '18px' }}>Companies</button>
+            <button className={styles.navButton}style={{ fontSize: '18px' }}>Public</button>
+          </div>
         </div>
       </div>
+
+
       <div className={styles.tableWrapper}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <div>
@@ -477,8 +481,8 @@ const PortfolioPage = () => {
             <div>Gross Return: </div>
           </div>
           <div>
-            <div>Currency: USD</div>
-            <div>Year: 2021</div>
+            <div><span style={{ fontWeight: 'bold' }}>Currency:</span> USD</div>
+            <div><span style={{ fontWeight: 'bold' }}>Year:</span> 2021</div>
           </div>
         </div>
         <div style={{ marginBottom: '10px' }}>
@@ -486,17 +490,20 @@ const PortfolioPage = () => {
           <button onClick={addCustomFormula} style={{ marginLeft: '10px' }}>Add Custom Score</button>
         </div>
         <div>
-          {Object.keys(columnVisibility).map((column, index) => (
-            <div key={index}>
-              <input
-                type="checkbox"
-                checked={columnVisibility[column]}
-                onChange={() => handleVisibilityChange(column)}
-              />
-              {column}
-            </div>
-          ))}
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            {Object.keys(columnVisibility).map((column, index) => (
+              <div key={index} style={{ marginRight: '10px' }}>
+                <input
+                  type="checkbox"
+                  checked={columnVisibility[column]}
+                  onChange={() => handleVisibilityChange(column)}
+                />
+                {column}
+              </div>
+            ))}
+          </div>
         </div>
+
         <div style={{ marginBottom: '10px' }}>
           <label htmlFor="scaleSlider">Adjust Table Size:</label>
           <input
@@ -516,7 +523,7 @@ const PortfolioPage = () => {
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+              <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{fontSize: '10px', fontWeight:'normal'}}>
                 {column.render('Header')}
                 {/* Add a span for sorting icons if needed */}
                 <span>
@@ -541,7 +548,7 @@ const PortfolioPage = () => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map(cell => (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    <td {...cell.getCellProps()} style={{fontSize: '10px'}}>{cell.render('Cell')}</td>
                   ))}
                 </tr>
               );
